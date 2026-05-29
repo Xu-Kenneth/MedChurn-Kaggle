@@ -1,6 +1,6 @@
 # MedChurn-Kaggle
 
-Lightweight demo of the [Healthcare Patient Churn & Retention Pipeline](https://github.com/Xu-Kenneth/Healthcare-Data-Analysis-Project) using the public Kaggle No-Show Appointments dataset.
+Lightweight demo of Medchurn project using the public Kaggle No-Show Appointments dataset.
 
 Predicts patient no-show probability using XGBoost with SHAP explainability. No database, no secrets, no setup overhead — just drop the CSV and run.
 
