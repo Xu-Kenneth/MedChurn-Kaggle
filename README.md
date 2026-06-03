@@ -32,6 +32,38 @@ python run.py
 
 That's it. The full pipeline — feature engineering, model training, SHAP analysis, and scoring — runs end to end in one command.
 
+## Running on PowerShell
+
+If you're using PowerShell and get a `pip: The term 'pip' is not recognized` error, use one of these approaches:
+
+**Option A: Use Python's pip module (quick fix)**
+
+```powershell
+python -m pip install -r requirements.txt
+python run.py
+```
+
+**Option B: Use a virtual environment (recommended)**
+
+```powershell
+# Create virtual environment
+python -m venv venv
+
+# Activate it
+.\venv\Scripts\Activate.ps1
+
+# Now pip works normally
+pip install -r requirements.txt
+python run.py
+```
+
+**Option C: Switch to Anaconda Prompt in VS Code**
+
+1. Press `Ctrl + ,` to open Settings
+2. Search for `terminal.integrated.defaultProfile.windows`
+3. Select **"Anaconda Prompt"** from the dropdown
+4. Restart your terminal — `pip install` will now work directly
+
 ## Output
 
 Results land in `data/output/`:
