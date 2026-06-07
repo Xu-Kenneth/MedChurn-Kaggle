@@ -1,68 +1,17 @@
 # MedChurn-Kaggle
 
-Lightweight demo of Medchurn project using the public Kaggle No-Show Appointments dataset.
+Predicts patient appointment no-shows using XGBoost with SHAP explainability. No database, no secrets, no Kaggle account needed.
 
-Predicts patient no-show probability using XGBoost with SHAP explainability. No database, no secrets, no setup overhead — just drop the CSV and run.
-
-## Setup
-
-**1. Install dependencies**
+## Quick start
 
 ```bash
-pip install -r requirements.txt
-```
-
-**2. Download the dataset**
-
-Go to: https://www.kaggle.com/datasets/joniarroba/noshowappointments
-
-Download `KaggleV2-May-2016.csv` and place it in `data/raw/`.
-
-```
-data/
-└── raw/
-    └── KaggleV2-May-2016.csv   ← put it here
-```
-
-**3. Run the pipeline**
-
-```bash
-python run.py
-```
-
-That's it. The full pipeline — feature engineering, model training, SHAP analysis, and scoring — runs end to end in one command.
-
-## Running on PowerShell
-
-If you're using PowerShell and get a `pip: The term 'pip' is not recognized` error, use one of these approaches:
-
-**Option A: Use Python's pip module (quick fix)**
-
-```powershell
-python -m pip install -r requirements.txt
-python run.py
-```
-
-**Option B: Use a virtual environment (recommended)**
-
-```powershell
-# Create virtual environment
-python -m venv venv
-
-# Activate it
-.\venv\Scripts\Activate.ps1
-
-# Now pip works normally
+git clone https://github.com/kxm1088/MedChurn-Kaggle
+cd MedChurn-Kaggle
 pip install -r requirements.txt
 python run.py
 ```
 
-**Option C: Switch to Anaconda Prompt in VS Code**
-
-1. Press `Ctrl + ,` to open Settings
-2. Search for `terminal.integrated.defaultProfile.windows`
-3. Select **"Anaconda Prompt"** from the dropdown
-4. Restart your terminal — `pip install` will now work directly
+A 5,000-appointment sample dataset is bundled — just clone and run.
 
 ## Output
 
@@ -74,13 +23,17 @@ Results land in `data/output/`:
 | `shap_drivers.csv` | Feature importance ranked by mean absolute SHAP value |
 | `scored_patients.csv` | Per-patient no-show probability and risk bucket (Low / Medium / High) |
 
+## Full dataset (optional)
+
+For the complete 110K-appointment dataset, download `KaggleV2-May-2016.csv` from [Kaggle](https://www.kaggle.com/datasets/joniarroba/noshowappointments) and place it in `data/raw/`. The pipeline auto-detects and uses it automatically.
+
 ## How It Works
 
-The pipeline mirrors the full production architecture but strips away the infrastructure:
+The pipeline mirrors a production architecture but strips away the infrastructure:
 
 | Production | Demo |
 |---|---|
-| PostgreSQL / Epic Clarity | `KaggleV2-May-2016.csv` |
+| PostgreSQL / Epic Clarity | Bundled CSV sample |
 | HMAC-SHA256 PHI tokenization | Not needed — dataset is already anonymized |
 | Vault / `.env` secrets | Not needed |
 | Optuna hyperparameter tuning | Fixed XGBoost params |
@@ -93,7 +46,7 @@ The ML approach is identical: temporal split (train on earlier appointments, tes
 
 **Medical Appointment No Shows** — Joni Hoppen & Aquarela Advanced Analytics  
 110,000+ outpatient appointments in Vitória, Brazil (2015–2016)  
-License: CC0 Public Domain  
+License: [CC0 Public Domain](https://creativecommons.org/publicdomain/zero/1.0/)
 
 **Label:** `no_show = 1` if the patient missed their appointment  
 **Features used:** age, wait days, SMS received, hypertension, diabetes, alcoholism, scholarship, gender, handicap

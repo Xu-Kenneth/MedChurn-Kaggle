@@ -1,4 +1,4 @@
-data/raw/
+data/raw/KaggleV2-May-2016.csv
 data/output/
 __pycache__/
 *.pyc

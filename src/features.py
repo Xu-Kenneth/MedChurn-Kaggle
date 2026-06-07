@@ -1,7 +1,8 @@
 import pandas as pd
 from pathlib import Path
 
-DATA_PATH = Path("data/raw/KaggleV2-May-2016.csv")
+_FULL_PATH   = Path("data/raw/KaggleV2-May-2016.csv")
+_SAMPLE_PATH = Path("data/raw/sample.csv")
 
 FEATURE_COLS = [
     "age",
@@ -16,7 +17,9 @@ FEATURE_COLS = [
 ]
 
 
-def load_and_engineer(path: Path = DATA_PATH) -> pd.DataFrame:
+def load_and_engineer(path: Path = None) -> pd.DataFrame:
+    if path is None:
+        path = _FULL_PATH if _FULL_PATH.exists() else _SAMPLE_PATH
     df = pd.read_csv(path)
 
     df["ScheduledDay"] = pd.to_datetime(df["ScheduledDay"])

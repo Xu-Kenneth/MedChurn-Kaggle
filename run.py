@@ -1,10 +1,13 @@
-from src.features import load_and_engineer
+from pathlib import Path
+
+from src.features import load_and_engineer, _FULL_PATH, _SAMPLE_PATH
 from src.train import train_and_evaluate
 from src.export import export
 
 
 def main():
-    print("Loading dataset and engineering features...")
+    using = _FULL_PATH if _FULL_PATH.exists() else _SAMPLE_PATH
+    print(f"Loading {'full dataset' if using == _FULL_PATH else 'sample (5k rows)'}...")
     df = load_and_engineer()
     print(f"  {len(df):,} appointments | no-show rate: {df['no_show'].mean():.1%}")
 
